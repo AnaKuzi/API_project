@@ -3,7 +3,7 @@ from rest_framework import permissions, viewsets, filters, generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.pagination import LimitOffsetPagination
 
-from posts.models import Group, Post, User
+from posts.models import Group, Post
 from .permissions import IsAuthorOrReadOnly
 from .serializers import PostSerializer, GroupSerializer
 from .serializers import CommentSerializer, FollowSerializer
@@ -38,7 +38,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user, post=post)
 
 
-class FollowList(generics.ListCreateAPIView): 
+class FollowList(generics.ListCreateAPIView):
     serializer_class = FollowSerializer
     permission_classes = (permissions.IsAuthenticated,)
     filter_backends = (filters.SearchFilter,)
